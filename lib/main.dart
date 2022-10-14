@@ -49,11 +49,11 @@ class ExpensesMainPage extends StatefulWidget {
 
 class _ExpensesMainPageState extends State<ExpensesMainPage> {
   final List<Transaction> _transactions = [
-    Transaction(
-        title: 'New shoes', id: 't1', amount: -69.99, date: DateTime.now()),
-    Transaction(title: 'Coffee', id: 't2', amount: -0.99, date: DateTime.now()),
-    Transaction(title: 'Juice', id: 't3', amount: -69.99, date: DateTime.now()),
-    Transaction(title: 'Check', id: 't4', amount: 100, date: DateTime.now()),
+    // Transaction(
+    //     title: 'New shoes', id: 't1', amount: -69.99, date: DateTime.now()),
+    // Transaction(title: 'Coffee', id: 't2', amount: -0.99, date: DateTime.now()),
+    // Transaction(title: 'Juice', id: 't3', amount: -69.99, date: DateTime.now()),
+    // Transaction(title: 'Check', id: 't4', amount: 100, date: DateTime.now()),
   ];
 
   void _addNewTransaction({required String title, required double amount}) {
