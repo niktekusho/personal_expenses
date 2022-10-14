@@ -31,6 +31,9 @@ class ExpensesMainPage extends StatelessWidget {
     Transaction(title: 'Check', id: 't4', amount: 100, date: DateTime.now()),
   ];
 
+  final titleController = TextEditingController();
+  final amountController = TextEditingController();
+
   ExpensesMainPage({super.key});
 
   @override
@@ -92,6 +95,34 @@ class ExpensesMainPage extends StatelessWidget {
           children: [
             Card(
               child: Text('Chart'),
+            ),
+            Card(
+              child: Container(
+                padding: EdgeInsets.all(12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    TextField(
+                      decoration: InputDecoration(labelText: 'Title'),
+                      controller: titleController,
+                    ),
+                    TextField(
+                      decoration: InputDecoration(labelText: 'Amount'),
+                      controller: amountController,
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 12),
+                      child: OutlinedButton(
+                        child: Text('Add transaction'),
+                        onPressed: () {
+                          print(titleController.text);
+                          print(amountController.text);
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
             ...transactionWidgets,
           ]),
