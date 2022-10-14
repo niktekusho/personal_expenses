@@ -20,7 +20,11 @@ class BarChart extends StatelessWidget {
       fit: FlexFit.tight,
       child: Column(
         children: [
-          FittedBox(child: Text('${spendedAmount.toStringAsFixed(0)} €')),
+          Container(
+            height: 18,
+            child:
+                FittedBox(child: Text('${spendedAmount.toStringAsFixed(0)} €')),
+          ),
           Container(
             // Fixed sizes are somewhat ok here...
             height: 128,

@@ -16,20 +16,27 @@ class Chart extends StatelessWidget {
   }
 
   List<GroupedTransactions> get groupedTransactionValues {
-    return List.generate(7, (index) {
-      final weekDayDateTime = DateTime.now().subtract(Duration(days: index));
-      final weekDayName = DateFormat.E().format(weekDayDateTime);
+    final today = DateTime.now();
 
-      final groupedTransactions = GroupedTransactions(day: weekDayName);
+    return List.generate(
+      7,
+      (index) {
+        // when index = 0, the date remains 'today'
+        final weekDayDateTime = today.subtract(Duration(days: index));
+        final weekDayName = DateFormat.E().format(weekDayDateTime);
 
-      for (var recentTransaction in recentTransactions) {
-        if (_isSameDay(recentTransaction.date, weekDayDateTime)) {
-          groupedTransactions.addTransactionAmount(recentTransaction.amount);
+        final groupedTransactions = GroupedTransactions(day: weekDayName);
+
+        for (var recentTransaction in recentTransactions) {
+          if (_isSameDay(recentTransaction.date, weekDayDateTime)) {
+            groupedTransactions.addTransactionAmount(recentTransaction.amount);
+          }
         }
-      }
 
-      return groupedTransactions;
-    });
+        return groupedTransactions;
+      },
+      // Reverse the list because it's built from today going backwards.
+    ).reversed.toList();
   }
 
   double get maxAmountTransaction {
