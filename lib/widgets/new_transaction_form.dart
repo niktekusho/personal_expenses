@@ -15,6 +15,19 @@ class NewTransactionForm extends StatelessWidget {
 
   NewTransactionForm({super.key, required this.addTransactionCallback});
 
+  void _submitForm() {
+    final amountText = amountController.text;
+    final title = titleController.text;
+
+    if (title.isNotEmpty && amountText.isNotEmpty) {
+      final amount = double.parse(amountText);
+      addTransactionCallback(
+        amount: amount,
+        title: title,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -26,20 +39,22 @@ class NewTransactionForm extends StatelessWidget {
             TextField(
               decoration: InputDecoration(labelText: 'Title'),
               controller: titleController,
+              onSubmitted: (_) => _submitForm(),
             ),
             TextField(
               decoration: InputDecoration(labelText: 'Amount'),
               controller: amountController,
+              keyboardType: TextInputType.numberWithOptions(
+                decimal: true,
+                signed: true,
+              ),
+              onSubmitted: (_) => _submitForm(),
             ),
             Container(
               margin: EdgeInsets.only(top: 12),
               child: OutlinedButton(
                 child: Text('Add transaction'),
-                onPressed: () {
-                  addTransactionCallback(
-                      amount: double.parse(amountController.text),
-                      title: titleController.text);
-                },
+                onPressed: _submitForm,
               ),
             ),
           ],
