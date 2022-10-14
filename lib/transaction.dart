@@ -15,10 +15,25 @@ class Transaction {
     return amount < 0;
   }
 
+  bool isAfterDate(DateTime dateTime) {
+    return date.isAfter(dateTime);
+  }
+
   // Transaction.copy(Transaction otherTransaction)
   //     : this(
   //           amount: otherTransaction.amount,
   //           date: otherTransaction.date,
   //           id: otherTransaction.id,
   //           title: otherTransaction.title);
+}
+
+class GroupedTransactions {
+  final String day;
+  double amount = 0;
+
+  GroupedTransactions({required this.day});
+
+  void addTransactionAmount(double amount) {
+    this.amount += amount;
+  }
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:personal_expenses/widgets/new_transaction_form.dart';
-import './widgets/transaction_list.dart';
+
+import 'widgets/chart.dart';
+import 'widgets/new_transaction_form.dart';
+import 'widgets/transaction_list.dart';
 import 'transaction.dart';
 
 void main() {
@@ -69,6 +71,14 @@ class _ExpensesMainPageState extends State<ExpensesMainPage> {
     });
   }
 
+  List<Transaction> get _recentTransactions {
+    final oneWeekAgo = DateTime.now().subtract(Duration(days: 7));
+
+    return _transactions
+        .where((transaction) => transaction.isAfterDate(oneWeekAgo))
+        .toList();
+  }
+
   void _openNewTransactionForm(context) {
     showModalBottomSheet(
       context: context,
@@ -93,9 +103,7 @@ class _ExpensesMainPageState extends State<ExpensesMainPage> {
         // mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Card(
-            child: Text('Chart'),
-          ),
+          Chart(recentTransactions: _transactions),
           TransactionList(transactions: _transactions)
         ],
       ),
