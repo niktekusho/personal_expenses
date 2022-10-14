@@ -7,15 +7,18 @@ void main() {
   runApp(const PersonalExpensesApp());
 }
 
+const _appTitle = 'Personal Expenses';
+
 class PersonalExpensesApp extends StatelessWidget {
   const PersonalExpensesApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: _appTitle,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
+            .copyWith(secondary: Colors.amber),
       ),
       home: ExpensesMainPage(),
     );
@@ -63,7 +66,7 @@ class _ExpensesMainPageState extends State<ExpensesMainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Personal Expenses'),
+        title: const Text(_appTitle),
         actions: [
           IconButton(
             onPressed: () => _openNewTransactionForm(context),
