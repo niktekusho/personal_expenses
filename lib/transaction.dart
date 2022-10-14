@@ -11,6 +11,10 @@ class Transaction {
     required this.date,
   });
 
+  bool get isExpense {
+    return amount < 0;
+  }
+
   // Transaction.copy(Transaction otherTransaction)
   //     : this(
   //           amount: otherTransaction.amount,

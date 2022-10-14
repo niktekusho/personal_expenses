@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'transaction.dart';
 
 void main() {
@@ -23,11 +24,10 @@ class PersonalExpensesApp extends StatelessWidget {
 class ExpensesMainPage extends StatelessWidget {
   final List<Transaction> transactions = [
     Transaction(
-        title: 'New shoes', id: 't1', amount: 69.99, date: DateTime.now()),
-    Transaction(title: 'Coffee', id: 't2', amount: 0.99, date: DateTime.now()),
-    Transaction(title: 'Juice', id: 't3', amount: 69.99, date: DateTime.now()),
-    Transaction(
-        title: 'New shoes', id: 't4', amount: 69.99, date: DateTime.now()),
+        title: 'New shoes', id: 't1', amount: -69.99, date: DateTime.now()),
+    Transaction(title: 'Coffee', id: 't2', amount: -0.99, date: DateTime.now()),
+    Transaction(title: 'Juice', id: 't3', amount: -69.99, date: DateTime.now()),
+    Transaction(title: 'Check', id: 't4', amount: 100, date: DateTime.now()),
   ];
 
   ExpensesMainPage({super.key});
@@ -36,14 +36,45 @@ class ExpensesMainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final transactionWidgets = transactions.map((transaction) => Card(
           child: Row(
+            // mainAxisAlignment: MainAxisAlignment.start,
+            // crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Container(
-                child: Text(transaction.amount.toString()),
+                // color: Colors.red,
+                // alignment: Alignment.centerLeft,
+
+                // TODO: not very good. Probably a better layout would be a grid!
+                width: 120,
+                margin: EdgeInsets.all(4),
+                padding: EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+                child: Text('${transaction.amount.toStringAsFixed(2)} €',
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      fontFamily: 'monospace',
+                      color: transaction.isExpense
+                          ? Colors.redAccent
+                          : Colors.green,
+                    )),
               ),
               Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(transaction.title),
-                  Text(transaction.date.toString()),
+                  Text(
+                    transaction.title,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    transaction.date.toString(),
+                    style: TextStyle(
+                      color: Colors.grey,
+                    ),
+                  ),
                 ],
               ),
             ],
@@ -54,12 +85,15 @@ class ExpensesMainPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Personal Expenses'),
       ),
-      body: Column(children: [
-        Card(
-          child: Text('Chart'),
-        ),
-        ...transactionWidgets,
-      ]),
+      body: Column(
+          // mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Card(
+              child: Text('Chart'),
+            ),
+            ...transactionWidgets,
+          ]),
     );
   }
 }
