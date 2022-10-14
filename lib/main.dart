@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:intl/intl.dart';
 import 'transaction.dart';
 
 void main() {
@@ -70,7 +71,7 @@ class ExpensesMainPage extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    transaction.date.toString(),
+                    DateFormat.yMEd().format(transaction.date),
                     style: TextStyle(
                       color: Colors.grey,
                     ),
