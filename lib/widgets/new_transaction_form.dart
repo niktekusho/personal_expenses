@@ -7,13 +7,19 @@ typedef AddTransactionCallback = void Function({
   required double amount,
 });
 
-class NewTransactionForm extends StatelessWidget {
-  final titleController = TextEditingController();
-  final amountController = TextEditingController();
-
+class NewTransactionForm extends StatefulWidget {
   final AddTransactionCallback addTransactionCallback;
 
   NewTransactionForm({super.key, required this.addTransactionCallback});
+
+  @override
+  State<NewTransactionForm> createState() => _NewTransactionFormState();
+}
+
+class _NewTransactionFormState extends State<NewTransactionForm> {
+  final titleController = TextEditingController();
+
+  final amountController = TextEditingController();
 
   void _submitForm() {
     final amountText = amountController.text;
@@ -21,10 +27,12 @@ class NewTransactionForm extends StatelessWidget {
 
     if (title.isNotEmpty && amountText.isNotEmpty) {
       final amount = double.parse(amountText);
-      addTransactionCallback(
+      widget.addTransactionCallback(
         amount: amount,
         title: title,
       );
+
+      Navigator.of(context).pop();
     }
   }
 
