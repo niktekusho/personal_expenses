@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
 
+/// Type definition used to narrow down the kind of functions passed to the form.
+/// This callback is called on the user's tap of the button 'Add transaction'.
+typedef AddTransactionCallback = void Function({
+  required String title,
+  required double amount,
+});
+
 class NewTransactionForm extends StatelessWidget {
   final titleController = TextEditingController();
   final amountController = TextEditingController();
 
-  NewTransactionForm({super.key});
+  final AddTransactionCallback addTransactionCallback;
+
+  NewTransactionForm({super.key, required this.addTransactionCallback});
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +36,9 @@ class NewTransactionForm extends StatelessWidget {
               child: OutlinedButton(
                 child: Text('Add transaction'),
                 onPressed: () {
-                  print(titleController.text);
-                  print(amountController.text);
+                  addTransactionCallback(
+                      amount: double.parse(amountController.text),
+                      title: titleController.text);
                 },
               ),
             ),
