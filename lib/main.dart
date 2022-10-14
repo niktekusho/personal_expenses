@@ -31,15 +31,17 @@ class ExpensesMainPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Personal Expenses'),
       ),
-      body: Column(
-          // mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Card(
-              child: Text('Chart'),
-            ),
-            UserTransactions(),
-          ]),
+      body: SingleChildScrollView(
+        child: Column(
+            // mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Card(
+                child: Text('Chart'),
+              ),
+              UserTransactions(),
+            ]),
+      ),
     );
   }
 }
