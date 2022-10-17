@@ -127,9 +127,9 @@ class _ExpensesMainPageState extends State<ExpensesMainPage> {
         children: [
           Container(
               child: Chart(recentTransactions: _transactions),
-              height: availableHeight * 0.4),
+              height: availableHeight * 0.3),
           Container(
-            height: availableHeight * 0.6,
+            height: availableHeight * 0.7,
             child: TransactionList(
               transactions: _transactions,
               deleteTransactionCallback: _deleteTransaction,

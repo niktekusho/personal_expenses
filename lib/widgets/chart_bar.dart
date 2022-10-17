@@ -16,18 +16,19 @@ class BarChart extends StatelessWidget {
   Widget build(BuildContext context) {
     final amountPercentage = maxAmount == 0 ? 0.0 : spendedAmount / maxAmount;
 
-    return Flexible(
-      fit: FlexFit.tight,
-      child: Column(
+    return LayoutBuilder(builder: (ctx, constraints) {
+      final maxHeight = constraints.maxHeight;
+
+      return Column(
         children: [
           Container(
-            height: 18,
+            height: maxHeight * 0.15,
             child:
                 FittedBox(child: Text('${spendedAmount.toStringAsFixed(0)} €')),
           ),
           Container(
+            height: maxHeight * 0.7,
             // Fixed sizes are somewhat ok here...
-            height: 128,
             width: 16,
             child: Stack(
               children: [
@@ -38,6 +39,9 @@ class BarChart extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
+                // amountPercentage < 0.05
+                //     ? Container()
+                //     :
                 // Second child is rendered after ("on top")
                 FractionallySizedBox(
                   heightFactor: amountPercentage,
@@ -52,9 +56,12 @@ class BarChart extends StatelessWidget {
               ],
             ),
           ),
-          Text(label),
+          Container(
+            height: maxHeight * 0.15,
+            child: FittedBox(child: Text(label)),
+          ),
         ],
-      ),
-    );
+      );
+    });
   }
 }
