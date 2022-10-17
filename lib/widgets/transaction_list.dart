@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:personal_expenses/utils.dart';
 
 import '../transaction.dart';
 
@@ -38,7 +39,7 @@ class TransactionList extends StatelessWidget {
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               Text(
-                DateFormat.yMEd().format(transaction.date),
+                formatDate(transaction.date),
                 style: TextStyle(
                   color: Colors.grey,
                 ),

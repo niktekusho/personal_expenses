@@ -58,12 +58,16 @@ class _ExpensesMainPageState extends State<ExpensesMainPage> {
     // Transaction(title: 'Check', id: 't4', amount: 100, date: DateTime.now()),
   ];
 
-  void _addNewTransaction({required String title, required double amount}) {
+  void _addNewTransaction({
+    required String title,
+    required double amount,
+    required DateTime date,
+  }) {
     final newTransaction = Transaction(
       title: title,
       id: DateTime.now().toIso8601String(),
       amount: amount,
-      date: DateTime.now(),
+      date: date,
     );
 
     setState(() {
