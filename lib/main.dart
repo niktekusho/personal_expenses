@@ -97,26 +97,43 @@ class _ExpensesMainPageState extends State<ExpensesMainPage> {
     );
   }
 
+  AppBar _buildAppBar(BuildContext context) {
+    return AppBar(
+      title: const Text(_appTitle),
+      actions: [
+        IconButton(
+          onPressed: () => _openNewTransactionForm(context),
+          icon: Icon(Icons.add),
+        )
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final appBar = _buildAppBar(context);
+
+    final appBodyHeight = MediaQuery.of(context).size.height;
+    final appBarHeight = appBar.preferredSize.height;
+    final statusBarHeight = MediaQuery.of(context).padding.top;
+
+    final availableHeight = appBodyHeight - appBarHeight - statusBarHeight;
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(_appTitle),
-        actions: [
-          IconButton(
-            onPressed: () => _openNewTransactionForm(context),
-            icon: Icon(Icons.add),
-          )
-        ],
-      ),
+      appBar: appBar,
       body: Column(
         // mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Chart(recentTransactions: _transactions),
-          TransactionList(
-            transactions: _transactions,
-            deleteTransactionCallback: _deleteTransaction,
+          Container(
+              child: Chart(recentTransactions: _transactions),
+              height: availableHeight * 0.4),
+          Container(
+            height: availableHeight * 0.6,
+            child: TransactionList(
+              transactions: _transactions,
+              deleteTransactionCallback: _deleteTransaction,
+            ),
           )
         ],
       ),

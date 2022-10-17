@@ -77,9 +77,6 @@ class TransactionList extends StatelessWidget {
             itemCount: transactions.length,
           );
 
-    return Container(
-        // TODO: an other fixed size...
-        height: 300,
-        child: widgetBody);
+    return widgetBody;
   }
 }
