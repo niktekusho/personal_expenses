@@ -13,40 +13,25 @@ class TransactionList extends StatelessWidget {
     final transaction = transactions[index];
 
     return Card(
-      child: Row(
-        children: [
-          Container(
-            // TODO: not very good. Probably a better layout would be a grid!
-            width: 120,
-            margin: EdgeInsets.all(4),
-            padding: EdgeInsets.symmetric(vertical: 12, horizontal: 8),
-            child: Text('${transaction.amount.toStringAsFixed(2)} €',
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                  fontFamily: 'monospace',
-                  color:
-                      transaction.isExpense ? Colors.redAccent : Colors.green,
-                )),
+      child: ListTile(
+        leading: Text('${transaction.amount.toStringAsFixed(2)} €',
+            textAlign: TextAlign.left,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+              fontFamily: 'monospace',
+              color: transaction.isExpense ? Colors.redAccent : Colors.green,
+            )),
+        title: Text(
+          transaction.title,
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
+        subtitle: Text(
+          formatDate(transaction.date),
+          style: TextStyle(
+            color: Colors.grey,
           ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                transaction.title,
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
-              Text(
-                formatDate(transaction.date),
-                style: TextStyle(
-                  color: Colors.grey,
-                ),
-              ),
-            ],
-          ),
-        ],
+        ),
       ),
     );
   }
