@@ -4,10 +4,17 @@ import 'package:personal_expenses/utils.dart';
 
 import '../transaction.dart';
 
+typedef DeleteTransactionCallback = void Function(String id);
+
 class TransactionList extends StatelessWidget {
   final List<Transaction> transactions;
+  final DeleteTransactionCallback deleteTransactionCallback;
 
-  const TransactionList({super.key, required this.transactions});
+  const TransactionList({
+    super.key,
+    required this.transactions,
+    required this.deleteTransactionCallback,
+  });
 
   Widget _buildTransactionListItem(BuildContext context, int index) {
     final transaction = transactions[index];
@@ -31,6 +38,10 @@ class TransactionList extends StatelessWidget {
           style: TextStyle(
             color: Colors.grey,
           ),
+        ),
+        trailing: IconButton(
+          icon: Icon(Icons.delete_forever, color: Theme.of(context).errorColor),
+          onPressed: () => deleteTransactionCallback(transaction.id),
         ),
       ),
     );

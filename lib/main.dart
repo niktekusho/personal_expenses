@@ -75,6 +75,12 @@ class _ExpensesMainPageState extends State<ExpensesMainPage> {
     });
   }
 
+  void _deleteTransaction(String id) {
+    setState(() {
+      _transactions.removeWhere((transaction) => transaction.id == id);
+    });
+  }
+
   List<Transaction> get _recentTransactions {
     final oneWeekAgo = DateTime.now().subtract(Duration(days: 7));
 
@@ -108,7 +114,10 @@ class _ExpensesMainPageState extends State<ExpensesMainPage> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Chart(recentTransactions: _transactions),
-          TransactionList(transactions: _transactions)
+          TransactionList(
+            transactions: _transactions,
+            deleteTransactionCallback: _deleteTransaction,
+          )
         ],
       ),
       floatingActionButton: FloatingActionButton(
