@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'widgets/chart.dart';
 import 'widgets/new_transaction_form.dart';
@@ -6,6 +7,11 @@ import 'widgets/transaction_list.dart';
 import 'transaction.dart';
 
 void main() {
+  // Portrait only
+  // SystemChrome.setPreferredOrientations([
+  //   DeviceOrientation.portraitDown,
+  //   DeviceOrientation.portraitDown,
+  // ]);
   runApp(const PersonalExpensesApp());
 }
 
